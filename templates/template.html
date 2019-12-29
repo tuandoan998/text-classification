@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Classify News with BERT.">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Classify News with BERT</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 2em;
+      color: #232323;
+      -webkit-font-smoothing: antialiased;
+      background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    }
+    .category-result {
+      text-align: center;
+      font-size: large;
+      color: #0074D9;
+    }
+    .space {
+      display: block;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form role="form" method="POST" action='/classify'>
+          <!-- Enter text to classify. -->
+          <div class="form-group">
+            <label for="text-to-classify"><strong>Enter the text:</strong></label>
+            <textarea name='text' class="form-control" id="text-to-classify" rows="20">{% if input_text %}{{input_text}}{% endif %}</textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary mb-2" id="classify">Classify text</button></br>
+        </form>
+      </div>
+      <div class="col">
+        <!-- classify text is rendered here. -->
+        <form>
+          <div class="form-group" id="classifier-text-response">
+            <label for="classification-result"><strong>Category:</strong></label>
+            <div class="space"></div>
+            <div class="category-result">
+              {% if predict_category %}
+              <p>{{predict_category}}</p>
+              {% endif %}
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- <script>
+  function news_classify() {
+    var input_text = document.getElementById('text-to-classify');
+    console.log(input_text);
+    $.ajax({
+      url: "/classify",
+      type: "POST",
+      data: {textd: input_text}
+    }).done(function(response) {
+      var html= "";
+      response =response.result;
+      $.each(response,function(key,val){
+       console.log(val);
+       html+="CATEGORY :"+val
+     });
+      html +="";
+      $(".classifier-result").append(html);
+    });
+  };
+</script> -->
+</html>

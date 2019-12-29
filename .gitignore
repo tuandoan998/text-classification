@@ -1,0 +1,9 @@
+*.ipynb_checkpoints/
+cache/
+data/business/
+data/entertainment/
+data/politics/
+data/sport/
+data/tech/
+outputs/*.bin
+__pycache__/
