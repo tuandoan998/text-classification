@@ -1,6 +1,7 @@
 import torch
 from torch.utils.data import DataLoader, SequentialSampler, TensorDataset
 from pytorch_pretrained_bert import BertTokenizer
+from transformers import DistilBertTokenizer
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 import json
@@ -10,7 +11,10 @@ with open('config.json') as json_file:
         config = json.load(json_file)
 
 def get_features(examples, label_map):
-    tokenizer = BertTokenizer.from_pretrained(config["BERT_BASE_CASED_MODEL"], do_lower_case=False)
+    if config["NAME_BERT_MODEL"]=='bert-base-cased':
+        tokenizer = BertTokenizer.from_pretrained(config["NAME_BERT_MODEL"], do_lower_case=False)
+    else:
+        tokenizer = DistilBertTokenizer.from_pretrained(config["NAME_BERT_MODEL"], do_lower_case=False)
     examples_len = len(examples)
     examples_for_processing = [(example, label_map, config["MAX_SEQ_LENGTH"], tokenizer) for example in examples]
     print(f'... Preparing to convert {examples_len} examples ...')

@@ -16,7 +16,7 @@ class Inference:
         self.model = BertForSequenceClassification.from_pretrained(self.config["CACHE_DIR"] + self.config["FINE_TUNED_MODEL"], cache_dir=self.config["CACHE_DIR"], num_labels=len(self.label_list))
         print('Model loaded!')
         self.model.to(device)
-        self.tokenizer = BertTokenizer.from_pretrained(self.config["BERT_BASE_CASED_MODEL"], do_lower_case=False)
+        self.tokenizer = BertTokenizer.from_pretrained(self.config["NAME_BERT_MODEL"], do_lower_case=False)
         
     def predict(self, text):
         self.model.eval()

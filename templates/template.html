@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Classify News with BERT.">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Classify News with BERT</title>
   <style>
     body {
@@ -26,14 +27,21 @@
   </style>
 </head>
 <body>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center text-primary">Text classification</h1>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="row">
       <div class="col">
         <form role="form" method="POST" action='/classify'>
           <!-- Enter text to classify. -->
           <div class="form-group">
-            <label for="text-to-classify"><strong>Enter the text:</strong></label>
-            <textarea name='text' class="form-control" id="text-to-classify" rows="20">{% if input_text %}{{input_text}}{% endif %}</textarea>
+            <h3 class="text-center text-info">Enter the text:</h3>
+            <textarea name='text' class="form-control text-body" id="text-to-classify" rows="20">{% if input_text %}{{input_text}}{% endif %}</textarea>
           </div>
 
           <button type="submit" class="btn btn-primary mb-2" id="classify">Classify text</button></br>
@@ -43,13 +51,14 @@
         <!-- classify text is rendered here. -->
         <form>
           <div class="form-group" id="classifier-text-response">
-            <label for="classification-result"><strong>Category:</strong></label>
+            <h3 class="text-center text-info">Category:</h3>
             <div class="space"></div>
-            <div class="category-result">
+            <div class="category-result text-success" height=100px>
               {% if predict_category %}
-              <p>{{predict_category}}</p>
+              <h1 font-size=50px>{{predict_category}}</h1>
               {% endif %}
             </div>
+
           </div>
 
         </form>
@@ -62,6 +71,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <!-- <script>
   function news_classify() {
     var input_text = document.getElementById('text-to-classify');

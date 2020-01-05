@@ -18,9 +18,7 @@ def index():
 def classify():
     try:
         text = request.form['text']
-        print(text)
         _, predict_category = news_model.predict(text)
-        print('++++++++++++++++++++ ' + predict_category)
         result = {
             "result": predict_category
         }
@@ -40,5 +38,5 @@ def start_tornado(app, port=5000):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # start_tornado(app)
+    # app.run(debug=True)
+    start_tornado(app)

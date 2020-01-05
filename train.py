@@ -4,6 +4,7 @@ from torch.nn import CrossEntropyLoss
 from tqdm import tqdm, trange
 import os
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM, BertForSequenceClassification
+from transformers import DistilBertForSequenceClassification
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 from multiprocessing import Pool, cpu_count
 import json
@@ -67,7 +68,11 @@ if __name__=='__main__':
     num_labels=len(label_list)
     
     print('... Loading BERT BASE model ...')
-    model = BertForSequenceClassification.from_pretrained(config["BERT_BASE_CASED_MODEL"], cache_dir = config["CACHE_DIR"], num_labels=num_labels)
+    if config["NAME_BERT_MODEL"]=='bert-base-cased':
+        model = BertForSequenceClassification.from_pretrained(config["NAME_BERT_MODEL"], cache_dir = config["CACHE_DIR"], num_labels=num_labels)
+    else:
+        model = DistilBertForSequenceClassification.from_pretrained(config["NAME_BERT_MODEL"], cache_dir = config["CACHE_DIR"], num_labels=num_labels)
+
     print('Model loaded!')
     model.to(device)
     
